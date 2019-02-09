@@ -4,7 +4,7 @@ while n > 0:
     if n:
         start = input().split(' ')
         configs = [[start, 0]]
-        final = sorted(start.copy())
+        final = sorted(start)
         visited = [start]
         done = False
         while not done:
