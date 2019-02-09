@@ -4,9 +4,9 @@ def create_move(new):
     global done
     if new is not None and new not in visited:
         visited.append(new_positions)
-        new_configs.append([new_positions , step + 1])
+        new_configs.append(new_positions)
         if new_positions == final:
-            print(step + 1)
+            print(step)
             done = True
             return True
     return False
@@ -15,18 +15,17 @@ def create_move(new):
 while n > 0:
     n = int(input())
     if n:
+        step = 0
         start = input().split(' ')
-        configs = [[start, 0]]  # formation, step
+        configs = [start]  # formation, step
         final = sorted(start)
         visited = [start]
         done = False
         while not done:
+            step += 1
             new_configs = []
-            for config in configs:
+            for positions in configs:
                 if done: break
-
-                step = config[1]
-                positions = config[0]
                 # print(step, positions)  # DEBUG statement
                 if positions == final:
                     print(step)
