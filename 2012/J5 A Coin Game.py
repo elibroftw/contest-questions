@@ -9,7 +9,6 @@ def create_move(other_side, this_side_visited):
     if new_positions is not None:
         hashable = '/'.join(new_positions)
         if hashable not in this_side_visited:
-            # new_configs.append(new_positions)
             if hashable in other_side:
                 print(step)
                 done = True
