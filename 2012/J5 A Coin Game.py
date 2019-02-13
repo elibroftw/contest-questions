@@ -19,15 +19,6 @@ def create_move(other_side, this_side_visited):
     return False
 
 
-def check_if_done(look_for, look_in):
-    global done
-    if look_for in look_in:
-        print(step)
-        done = True
-        return True
-    return done
-
-
 to_int = int
 get_length = len
 
@@ -40,11 +31,9 @@ while n > 0:
         final = sorted(start)
 
         forward_configs = {'/'.join(start)}
-        # forward_configs = [start]
         visited_from_start = {'/'.join(start)}
 
         backward_configs = {'/'.join(final)}
-        # backward_configs = [final]
         visited_from_back = {'/'.join(final)}
 
         if start == final:
@@ -57,9 +46,6 @@ while n > 0:
             step += 1
             new_configs = set()
             for positions in forward_configs:
-                # if check_if_done(positions, backward_configs):
-                #     break
-                # else:
                 positions = positions.split('/')
                 for i, pos in enumerate(positions):
                     if done: break
@@ -94,10 +80,6 @@ while n > 0:
             step += 1
             new_configs = set()
             for positions in backward_configs:
-                # print(step, positions)  # DEBUG statement
-                # if check_if_done(positions, forward_configs):
-                #     break
-                # else:
                 positions = positions.split('/')
                 for i, pos in enumerate(positions):
                     if done:
