@@ -16,8 +16,8 @@ I will try to do the remaing once I take my SAT
 | [2014](../master/2014) |  senior | TODO
 | [2013](../master/2013) |  junior | TODO
 | [2013](../master/2013) |  senior | TODO
-| [2012](../master/2012) |  junior | 1 - 4
-| [2012](../master/2012) |  senior | TODO
+| [2012](../master/2012) |  junior | 1 - 5
+| [2012](../master/2012) |  senior | 4 - 5
 | [2011](../master/2011) |  junior | 1 - 5
 | [2010](../master/2010) |  junior | 1 - 5
 | [2010](../master/2010) |  senior | 1 - 2
