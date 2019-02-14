@@ -1,5 +1,4 @@
 # from time import time
-# THIS SOLUTION WORKS FOR S4!
 # PASSES ALL TEST CASES ON CCC and DMOJ
 # Lesson learned: use sets when order and index is not important,
 # since a lookup for a set is O(1) v. list which is O(n)
