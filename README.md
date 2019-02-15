@@ -1,4 +1,4 @@
-# ccc
+# Canadian Computing Competition
 
 | **Year**  |  **Type**  |  **Completed**  | **Total Score**
 |---|---|---|---
