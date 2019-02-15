@@ -1,4 +1,3 @@
-# from time import time
 # PASSES ALL TEST CASES ON CCC and DMOJ
 # Lesson learned: use sets when order and index is not important,
 # since a lookup for a set is O(1) v. list which is O(n)
@@ -104,4 +103,3 @@ while n > 0:
                 print('IMPOSSIBLE')
                 done = True
                 break
-        # print(time() - start_time)
