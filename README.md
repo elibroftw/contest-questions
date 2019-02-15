@@ -1,6 +1,5 @@
 # ccc
-My Canadian Computing Competition Solutions click link below to learn more about the CCC
-I will try to do the remaing once I take my SAT
+My Canadian Computing Competition Solutions click link below to learn more about the CCC.
 
 |  Year  |  Type  |  Completed  
 |---|---|---
