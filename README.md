@@ -1,5 +1,4 @@
 # ccc
-My Canadian Computing Competition Solutions click link below to learn more about the CCC.
 
 | **Year**  |  **Type**  |  **Completed**  | **Total Score**
 |---|---|---|---
