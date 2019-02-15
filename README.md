@@ -2,7 +2,7 @@
 My Canadian Computing Competition Solutions click link below to learn more about the CCC.
 
 |  Year  |  Type  |  Completed  | Total Score
-|---|---|---
+|---|---|---|---
 | [2018](../master/2018) |  junior | 1 - 4  | 60/75
 | [2018](../master/2018) |  senior | 1 - 4  | 60/75
 | [2017](../master/2017) |  junior | 1 - 5  | 75/75
