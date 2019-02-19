@@ -1,12 +1,12 @@
 # author: Edd Mann
 # source-url: https://eddmann.com/posts/depth-first-search-and-breadth-first-search-in-python/
 
-graph = {'A': set(['B', 'C']),
-         'B': set(['A', 'D', 'E']),
-         'C': set(['A', 'F']),
-         'D': set(['B']),
-         'E': set(['B', 'F']),
-         'F': set(['C', 'E'])}
+graph = {'A': {'B', 'C'},
+         'B': {'A', 'D', 'E'},
+         'C': {'A', 'F'},
+         'D': {'B'},
+         'E': {'B', 'F'},
+         'F': {'C', 'E'}}
 
 
 def dfs(graph, start):
@@ -88,3 +88,11 @@ def shortest_path(graph, start, goal):
         return None
 
 # shortest_path(graph, 'A', 'F') # ['A', 'C', 'F']
+
+
+graph = {'A': {'B', 'C'},
+         'B': {'A', 'D', 'E'},
+         'C': {'A', 'F'},
+         'D': {'B'},
+         'E': {'B', 'F'},
+         'F': {'C', 'E'}}
