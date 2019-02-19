@@ -55,6 +55,17 @@ def bfs(graph, start):
             queue.extend(graph[vertex] - visited)
     return visited
 
+
+def dfs(graph, start):
+    visited, stack = set(), [start]
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited and vertex in graph:
+            visited.add(vertex)
+            stack.extend(graph[vertex] - visited)
+    return visited
+
+
 while edges < verticies - 1:
     path = useful_paths.pop(0)
     start = path[0]
@@ -62,7 +73,7 @@ while edges < verticies - 1:
     energy = path[2]
     # print(start, end, find_parent(end), find_parent(start), parent_graph)
     # detect if it makese a cycle using BFS/DFS. 
-    if start not in bfs(tree, end):
+    if start not in dfs(tree, end):
         # new_paths.add((start, end))
         minimum_energy += energy
         edges += 1
