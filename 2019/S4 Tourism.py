@@ -16,10 +16,11 @@ else:
         day += 1
         for combo in combos:
             score_so_far, attractions_left = combo
-            minimum_attractions = ceil(len(attractions_left) / (fewest_days - day) / k)
-            if not minimum_attractions:
+            
+            if not fewest_days - day == 0:
                 final_scores.append(score_so_far + max(attractions_left))
             else:
+                minimum_attractions = ceil(len(attractions_left) / (fewest_days - day) / k)
                 for i in range(minimum_attractions, min(k + 1, len(attractions_left) + 1)):
                     new_attractions_left = attractions_left[i:]
                     new_score = score_so_far + max(attractions_left[:i])
