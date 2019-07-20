@@ -9,6 +9,7 @@
 
 # I was also thinking about just counting number of 0's 1's and 2's 
 # and then printing but that's also pretty simple of a solution
+# and is not very usable if the range was greater
 
 test_cases = int(input())
 
