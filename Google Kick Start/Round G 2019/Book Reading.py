@@ -1,3 +1,5 @@
+# does not work for second test set
+
 t = int(input())
 for case in range(t):
     n, m, q  = [int(x) for x in input().split()]

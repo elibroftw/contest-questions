@@ -1,5 +1,4 @@
-def possible_combos():
-    pass
+# does not work for second test set
 
 t = int(input())
 for case in range(t):
