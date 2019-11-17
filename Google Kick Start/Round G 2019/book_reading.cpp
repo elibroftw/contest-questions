@@ -19,21 +19,25 @@ using namespace std;
 
 typedef long long ll;
 typedef long double ld;
-typedef pair <int, int> pii;
-typedef pair <ll, ll> pll;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
 
 // CONSTANTS GO UNDER HERE
-// LESSON LEARNED: store every computation to a map
+// LESSONS LEARNED:
+// store every computation to a map
+// True is a 1 and False is a 0 (supports addition)
 
-int main() {
+int main()
+{
     fast_cin();
     int t;
     cin >> t;
+    return 0;
     for (int i = 1; i <= t; i++)
     {
         int n, m, q;
-        set <int> torn_out_set;
-        map <int, int> duplicate_reader;
+        set<int> torn_out_set;
+        map<int, int> duplicate_reader;
         cin >> n >> m >> q;
         for (int j = 0; j < m; j++)
         {
@@ -44,21 +48,18 @@ int main() {
         ll pages_read = 0;
         for (int r = 0; r < q; r++)
         {
-            int reader; 
+            int reader;
             cin >> reader;
-            if (!duplicate_reader.count(reader)){
-                int reader_read = 0;
+            if (!duplicate_reader.count(reader))
+            {
+                duplicate_reader[reader] = 0;
                 for (int pr = reader - 1; pr < n; pr += reader)
                 {
-                    if(!torn_out_set.count(pr)) {
-                        reader_read ++;
-                    }
+                    duplicate_reader[reader] += !torn_out_set.count(pr);
                 }
-                duplicate_reader[reader] = reader_read;
             }
             pages_read += duplicate_reader[reader];
         }
         cout << "Case #" << i << ": " << pages_read << '\n';
     }
-    return 0;
 }
