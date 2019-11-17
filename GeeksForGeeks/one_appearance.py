@@ -1,6 +1,7 @@
 # https://www.geeksforgeeks.org/find-the-element-that-appears-once/
 # list of N (# of appearances) sets
 # or just two sets, one set being one appearance, the latter being more than one appearance
+# use a hashmap wth a set if you want to find which numbers do not appear a certain amount of times
 
 def find_once(arr):
     once = set()
