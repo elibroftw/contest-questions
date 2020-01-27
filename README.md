@@ -1,6 +1,7 @@
 # Programming Challenges Solution Repository
 Includes solutions for uWaterloo's CCC, Hackerrank, GeeksForGeeks, LeetCode, Google Kickstart, and some useful graph algorithms in python 3.
 # Canadian Computing Competition
+https://cemc.math.uwaterloo.ca/contests/computing.html
 
 | **Year**  |  **Type**  |  **Completed**  | **Total Score**
 |---|---|---|---
