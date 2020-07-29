@@ -8,26 +8,24 @@ def do_left(left):
     new_positions = None
     left = positions[left]
     if left == '':
-        new_positions = positions[:i - 1] + [pos[0]] + [pos[1:]] + positions[i + 1:]
+        new_positions = positions[:i - 1] + (pos[0],) + (pos[1:],) + positions[i + 1:]
     elif to_int(pos[0]) < to_int(left[0]):
-        new_positions = positions[:i - 1] + [
-            pos[0] + positions[i - 1]] + [pos[1:]] + positions[i + 1:]
+        new_positions = positions[:i - 1] + (pos[0] + positions[i - 1],) + (pos[1:],) + positions[i + 1:]
 
 def do_right(right):
     global new_positions
     new_positions = None
     right = positions[right]
     if right == '':
-        new_positions = positions[:i] + [pos[1:]] + [pos[0]] + positions[i + 2:]
+        new_positions = positions[:i] + (pos[1:],) + (pos[0],) + positions[i + 2:]
     elif to_int(pos[0]) < to_int(right[0]):
-        new_positions = positions[:i] + [pos[1:]] + [
-            pos[0] + positions[i + 1]] + positions[i + 2:]
+        new_positions = positions[:i] + (pos[1:],) + (pos[0] + positions[i + 1],) + positions[i + 2:]
 
 
 def create_move(other_side, this_side_visited):
     global done, new_configs, new_positions
     if new_positions is not None:
-        hashable = ' '.join(new_positions)
+        hashable = tuple(new_positions)
         if hashable not in this_side_visited:
             if hashable in other_side:
                 print(step)
@@ -46,13 +44,14 @@ while n > 0:
     n = to_int(input())
     if n:
         start = input().split()
-        final = sorted(start)
+        final = tuple(sorted(start))
 
-        forward_configs = {' '.join(start)}
-        visited_from_start = {' '.join(start)}
+        start = tuple(start)
+        forward_configs = {start}
+        visited_from_start = {start}
 
-        backward_configs = {' '.join(final)}
-        visited_from_back = {' '.join(final)}
+        backward_configs = {final}
+        visited_from_back = {final}
 
         step = 0
         done = start == final
@@ -62,7 +61,7 @@ while n > 0:
             step += 1
             new_configs = set()
             for positions in forward_configs:
-                positions = positions.split(' ')
+                # positions = positions.split(' ')
                 if done: break
                 for i, pos in enumerate(positions):
                     if pos:
@@ -81,7 +80,7 @@ while n > 0:
             new_configs = set()
             for positions in backward_configs:
                 if done: break
-                positions = positions.split(' ')
+                # positions = positions.split(' ')
                 for i, pos in enumerate(positions):
                     if pos:
                         if i > 0:
