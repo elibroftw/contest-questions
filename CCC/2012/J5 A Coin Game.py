@@ -18,7 +18,6 @@ def do_left(coin_lineup, coin_stack, centre_stack_index):
 
 
 def do_right(coin_lineup, coin_stack, centre_stack_index):
-    # global coin_lineup, coin_stack
     i = centre_stack_index
     right_stack = coin_lineup[i + 1]
     if stack_empty(right_stack):
@@ -37,7 +36,7 @@ def create_move(other_side, this_side_visited, new_lineup, new_configs):
     return False
 
 
-def make_step(lineups, opposite_lineups, visited):
+def make_moves(lineups, opposite_lineups, visited):
     new_lineups = set()
     for coin_lineup in lineups:
         for i, coin_stack in enumerate(coin_lineup):
@@ -68,11 +67,11 @@ def analyze_test_case(starting_lineup: tuple):
         steps += 1
         if steps % 2:
             new_configs = set()
-            lines_forward = make_step(lines_forward, lines_backward, visited_from_start)
+            lines_forward = make_moves(lines_forward, lines_backward, visited_from_start)
             if lines_forward == True: return steps
         else:
             new_configs = set()
-            lines_backward = make_step(lines_backward, lines_forward, visited_from_back)
+            lines_backward = make_moves(lines_backward, lines_forward, visited_from_back)
             if lines_backward == True: return steps
         if not lines_forward and not lines_backward:
             return 'IMPOSSIBLE'
