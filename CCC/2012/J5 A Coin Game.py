@@ -27,8 +27,7 @@ def do_right(coin_lineup, coin_stack, centre_stack_index):
         return coin_lineup[:i] + (coin_stack[1:], coin_stack[0] + coin_lineup[i + 1]) + coin_lineup[i + 2:]
 
 
-def create_move(other_side, this_side_visited, new_lineup):
-    global new_configs
+def create_move(other_side, this_side_visited, new_lineup, new_configs):
     if new_lineup is not None:
         hashable = tuple(new_lineup)
         if hashable not in this_side_visited:
@@ -67,11 +66,11 @@ while n > 0:
                     if coin_stack:
                         if i > 0:
                             possible_lineup = do_left(coin_lineup, coin_stack, i)
-                            done = create_move(lines_backward, visited_from_start, possible_lineup)
+                            done = create_move(lines_backward, visited_from_start, possible_lineup, new_configs)
                             if done: break
                         if i < n - 1:
                             possible_lineup = do_right(coin_lineup, coin_stack, i)
-                            done = create_move(lines_backward, visited_from_start, possible_lineup)
+                            done = create_move(lines_backward, visited_from_start, possible_lineup, new_configs)
                             if done: break
             lines_forward = new_configs.copy()
 
@@ -83,11 +82,11 @@ while n > 0:
                     if coin_stack:
                         if i > 0:
                             possible_lineup = do_left(coin_lineup, coin_stack, i)
-                            done = create_move(lines_forward, visited_from_back, possible_lineup)
+                            done = create_move(lines_forward, visited_from_back, possible_lineup, new_configs)
                             if done: break
                         if i < n - 1:
                             possible_lineup = do_right(coin_lineup, coin_stack, i)
-                            done = create_move(lines_forward, visited_from_back, possible_lineup)
+                            done = create_move(lines_forward, visited_from_back, possible_lineup, new_configs)
                             if done: break
             lines_backward = new_configs.copy()
 
