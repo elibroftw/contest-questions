@@ -34,7 +34,6 @@ def create_move(other_side, this_side_visited, new_lineup):
         if hashable not in this_side_visited:
             if hashable in other_side:
                 print(step)
-                done = True
                 return True
             this_side_visited.add(hashable)
             new_configs.add(hashable)
@@ -68,13 +67,12 @@ while n > 0:
                     if coin_stack:
                         if i > 0:
                             possible_lineup = do_left(coin_lineup, coin_stack, i)
-                            if create_move(lines_backward, visited_from_start, possible_lineup):
-                                break
-
+                            done = create_move(lines_backward, visited_from_start, possible_lineup)
+                            if done: break
                         if i < n - 1:
                             possible_lineup = do_right(coin_lineup, coin_stack, i)
-                            if create_move(lines_backward, visited_from_start, possible_lineup):
-                                break
+                            done = create_move(lines_backward, visited_from_start, possible_lineup)
+                            if done: break
             lines_forward = new_configs.copy()
 
             step += 1
@@ -85,14 +83,12 @@ while n > 0:
                     if coin_stack:
                         if i > 0:
                             possible_lineup = do_left(coin_lineup, coin_stack, i)
-                            if create_move(lines_forward, visited_from_back, possible_lineup):
-                                break
-
+                            done = create_move(lines_forward, visited_from_back, possible_lineup)
+                            if done: break
                         if i < n - 1:
                             possible_lineup = do_right(coin_lineup, coin_stack, i)
-                            if create_move(lines_forward, visited_from_back, possible_lineup):
-                                break
-
+                            done = create_move(lines_forward, visited_from_back, possible_lineup)
+                            if done: break
             lines_backward = new_configs.copy()
 
             if not lines_forward and not lines_backward:
