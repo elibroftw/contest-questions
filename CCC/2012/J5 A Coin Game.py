@@ -4,22 +4,22 @@
 
 
 def do_left(left):
-    global new_positions
+    global new_positions, coin_lineup, coin_stack
     new_positions = None
-    left = positions[left]
+    left = coin_lineup[left]
     if left == '':
-        new_positions = positions[:i - 1] + (pos[0],) + (pos[1:],) + positions[i + 1:]
-    elif to_int(pos[0]) < to_int(left[0]):
-        new_positions = positions[:i - 1] + (pos[0] + positions[i - 1],) + (pos[1:],) + positions[i + 1:]
+        new_positions = coin_lineup[:i - 1] + (coin_stack[0],) + (coin_stack[1:],) + coin_lineup[i + 1:]
+    elif int(coin_stack[0]) < int(left[0]):
+        new_positions = coin_lineup[:i - 1] + (coin_stack[0] + coin_lineup[i - 1],) + (coin_stack[1:],) + coin_lineup[i + 1:]
 
 def do_right(right):
     global new_positions
     new_positions = None
-    right = positions[right]
+    right = coin_lineup[right]
     if right == '':
-        new_positions = positions[:i] + (pos[1:],) + (pos[0],) + positions[i + 2:]
-    elif to_int(pos[0]) < to_int(right[0]):
-        new_positions = positions[:i] + (pos[1:],) + (pos[0] + positions[i + 1],) + positions[i + 2:]
+        new_positions = coin_lineup[:i] + (coin_stack[1:],) + (coin_stack[0],) + coin_lineup[i + 2:]
+    elif int(coin_stack[0]) < int(right[0]):
+        new_positions = coin_lineup[:i] + (coin_stack[1:],) + (coin_stack[0] + coin_lineup[i + 1],) + coin_lineup[i + 2:]
 
 
 def create_move(other_side, this_side_visited):
@@ -36,21 +36,18 @@ def create_move(other_side, this_side_visited):
     return False
 
 
-to_int = int
-get_length = len
 n = 1
-
 while n > 0:
-    n = to_int(input())
+    n = int(input())
     if n:
         start = input().split()
         final = tuple(sorted(start))
 
         start = tuple(start)
-        forward_configs = {start}
+        lines_forward = {start}
         visited_from_start = {start}
 
-        backward_configs = {final}
+        lines_backward = {final}
         visited_from_back = {final}
 
         step = 0
@@ -60,42 +57,42 @@ while n > 0:
         while not done:
             step += 1
             new_configs = set()
-            for positions in forward_configs:
+            for coin_lineup in lines_forward:
                 # positions = positions.split(' ')
                 if done: break
-                for i, pos in enumerate(positions):
-                    if pos:
+                for i, coin_stack in enumerate(coin_lineup):
+                    if coin_stack:
                         if i > 0:
                             do_left(i - 1)
-                            if create_move(backward_configs, visited_from_start):
+                            if create_move(lines_backward, visited_from_start):
                                 break
 
                         if i < n - 1:
                             do_right(i + 1)
-                            if create_move(backward_configs, visited_from_start):
+                            if create_move(lines_backward, visited_from_start):
                                 break
-            forward_configs = new_configs.copy()
+            lines_forward = new_configs.copy()
 
             step += 1
             new_configs = set()
-            for positions in backward_configs:
+            for coin_lineup in lines_backward:
                 if done: break
                 # positions = positions.split(' ')
-                for i, pos in enumerate(positions):
-                    if pos:
+                for i, coin_stack in enumerate(coin_lineup):
+                    if coin_stack:
                         if i > 0:
                             do_left(i - 1)
-                            if create_move(forward_configs, visited_from_back):
+                            if create_move(lines_forward, visited_from_back):
                                 break
 
                         if i < n - 1:
                             do_right(i + 1)
-                            if create_move(forward_configs, visited_from_back):
+                            if create_move(lines_forward, visited_from_back):
                                 break
 
-            backward_configs = new_configs.copy()
+            lines_backward = new_configs.copy()
 
-            if not forward_configs and not backward_configs:
+            if not lines_forward and not lines_backward:
                 print('IMPOSSIBLE')
                 done = True
                 break
