@@ -45,8 +45,6 @@ n = 1
 while n > 0:
     n = to_int(input())
     if n:
-        # start_time = time()
-        step = 0
         start = input().split()
         final = sorted(start)
 
@@ -56,10 +54,9 @@ while n > 0:
         backward_configs = {' '.join(final)}
         visited_from_back = {' '.join(final)}
 
-        if start == final:
-            print(step)
-            done = True
-        else: done = False
+        step = 0
+        done = start == final
+        if done: print(step)
 
         while not done:
             step += 1
@@ -96,7 +93,7 @@ while n > 0:
                             do_right(i + 1)
                             if create_move(forward_configs, visited_from_back):
                                 break
-                
+
             backward_configs = new_configs.copy()
 
             if not forward_configs and not backward_configs:
