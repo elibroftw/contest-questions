@@ -37,9 +37,8 @@ def create_move(other_side, this_side_visited, new_lineup, new_configs):
     return False
 
 
-def analyze_test_case(starting_lineup: list):
+def analyze_test_case(starting_lineup: tuple):
     final_lineup = tuple(sorted(starting_lineup))
-    starting_lineup = tuple(starting_lineup)
     lines_forward = {starting_lineup}
     visited_from_start = {starting_lineup}
 
@@ -89,5 +88,5 @@ n = 1
 while n > 0:
     n = int(input())
     if n:
-        start = input().split()
-        print(analyze_test_case(start))
+        starting_lineup = tuple(input().split())
+        print(analyze_test_case(starting_lineup))
