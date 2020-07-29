@@ -31,12 +31,58 @@ def create_move(other_side, this_side_visited, new_lineup, new_configs):
     if new_lineup is not None:
         hashable = tuple(new_lineup)
         if hashable not in this_side_visited:
-            if hashable in other_side:
-                print(step)
-                return True
+            if hashable in other_side: return True
             this_side_visited.add(hashable)
             new_configs.add(hashable)
     return False
+
+
+def analyze_test_case(starting_lineup: list):
+    final_lineup = tuple(sorted(starting_lineup))
+    starting_lineup = tuple(starting_lineup)
+    lines_forward = {starting_lineup}
+    visited_from_start = {starting_lineup}
+
+    lines_backward = {final_lineup}
+    visited_from_back = {final_lineup}
+
+    steps = 0
+    if starting_lineup == final_lineup: return steps
+
+    while True:
+        steps += 1
+        new_configs = set()
+        for coin_lineup in lines_forward:
+            for i, coin_stack in enumerate(coin_lineup):
+                if coin_stack:
+                    if i > 0:
+                        possible_lineup = do_left(coin_lineup, coin_stack, i)
+                        if create_move(lines_backward, visited_from_start, possible_lineup, new_configs):
+                            return steps
+                    if i < n - 1:
+                        possible_lineup = do_right(coin_lineup, coin_stack, i)
+                        if create_move(lines_backward, visited_from_start, possible_lineup, new_configs):
+                            return steps
+        lines_forward = new_configs.copy()
+
+        steps += 1
+        new_configs = set()
+        for coin_lineup in lines_backward:
+            for i, coin_stack in enumerate(coin_lineup):
+                if coin_stack:
+                    if i > 0:
+                        possible_lineup = do_left(coin_lineup, coin_stack, i)
+                        if create_move(lines_forward, visited_from_back, possible_lineup, new_configs):
+                            return steps
+                    if i < n - 1:
+                        possible_lineup = do_right(coin_lineup, coin_stack, i)
+                        if create_move(lines_forward, visited_from_back, possible_lineup, new_configs):
+                            return steps
+        lines_backward = new_configs.copy()
+
+        if not lines_forward and not lines_backward:
+            return 'IMPOSSIBLE'
+
 
 
 n = 1
@@ -44,53 +90,4 @@ while n > 0:
     n = int(input())
     if n:
         start = input().split()
-        final = tuple(sorted(start))
-
-        start = tuple(start)
-        lines_forward = {start}
-        visited_from_start = {start}
-
-        lines_backward = {final}
-        visited_from_back = {final}
-
-        step = 0
-        done = start == final
-        if done: print(step)
-
-        while not done:
-            step += 1
-            new_configs = set()
-            for coin_lineup in lines_forward:
-                if done: break
-                for i, coin_stack in enumerate(coin_lineup):
-                    if coin_stack:
-                        if i > 0:
-                            possible_lineup = do_left(coin_lineup, coin_stack, i)
-                            done = create_move(lines_backward, visited_from_start, possible_lineup, new_configs)
-                            if done: break
-                        if i < n - 1:
-                            possible_lineup = do_right(coin_lineup, coin_stack, i)
-                            done = create_move(lines_backward, visited_from_start, possible_lineup, new_configs)
-                            if done: break
-            lines_forward = new_configs.copy()
-
-            step += 1
-            new_configs = set()
-            for coin_lineup in lines_backward:
-                if done: break
-                for i, coin_stack in enumerate(coin_lineup):
-                    if coin_stack:
-                        if i > 0:
-                            possible_lineup = do_left(coin_lineup, coin_stack, i)
-                            done = create_move(lines_forward, visited_from_back, possible_lineup, new_configs)
-                            if done: break
-                        if i < n - 1:
-                            possible_lineup = do_right(coin_lineup, coin_stack, i)
-                            done = create_move(lines_forward, visited_from_back, possible_lineup, new_configs)
-                            if done: break
-            lines_backward = new_configs.copy()
-
-            if not lines_forward and not lines_backward:
-                print('IMPOSSIBLE')
-                done = True
-                break
+        print(analyze_test_case(start))
