@@ -5,8 +5,8 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
-#include <map>
-#include <set>
+#include <unordered_map>
+#include <unordered_set>
 #include <queue>
 #include <stack>
 #include <vector>
@@ -36,8 +36,8 @@ int main()
     for (int i = 1; i <= t; i++)
     {
         int n, m, q;
-        set<int> torn_out_set;
-        map<int, int> duplicate_reader;
+        unordered_set<int> torn_out_set;
+        unordered_map<int, int> duplicate_reader;
         cin >> n >> m >> q;
         for (int j = 0; j < m; j++)
         {
