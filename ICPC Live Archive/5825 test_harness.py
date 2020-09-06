@@ -29,9 +29,11 @@ assert solve(4, [1000, -1000, 1000, -1000]) == 2
 assert solve(3, [1000, -1000, 0]) == 2
 solve(10 ** 4, [1000 if random.randint(0, 2) else -1000 for _ in range(10 ** 4)])  # 10 ** 4
 solve(10 ** 5, [1000 if random.randint(0, 2) else -1000 for _ in range(10 ** 5)])  # 10 ** 5
-for x in range(10):
+for x in range(20):
     # length = 10 ** 6
-    hard_lst = [random.randint(-1000, 1000) for _ in range(10 ** 6)]
+    # simulate string input
+    hard_lst = ' '.join([str(random.randint(-1000, 1000)) for _ in range(10 ** 6)])
     t1 = time.time()
-    print(solve(10 ** 6, hard_lst))
+    integers = [int(x) for x in hard_lst.split()]
+    ans = solve(10 ** 6, integers)
     print(time.time() - t1)

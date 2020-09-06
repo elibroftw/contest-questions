@@ -2,66 +2,38 @@
 # https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&category=530&page=show_problem&problem=3836
 
 
-def solve_old(n, integers):
-    # v2 solution. TLE
-    iters = 0
-    sums = {}
-    valid_keys = set()
-    keys_to_ignore = set()
-    total_sum = 0
-    for i, integer in enumerate(integers):
-        # add integers in order
-        total_sum += integer
-        for k in valid_keys:
-            if k not in keys_to_ignore:
-                iters += 1
-                v = sums[k]
-                if v + integer < 0:
-                    del sums[k]
-                    keys_to_ignore.add(k)
-                else: sums[k] += integer
-        if integer >= 0:
-            valid_keys.add(i)
-            sums[i] = integer
-    if total_sum < 0: return 0  # short-circuit
-    for i, integer in enumerate(integers):
-        for k in valid_keys:
-            if k != i and k not in keys_to_ignore:
-                iters += 1
-                v = sums[k]
-                if v + integer < 0:
-                    del sums[k]
-                    keys_to_ignore.add(k)
-                else: sums[k] += integer
-        if i in valid_keys: valid_keys.remove(i)
-    return len(sums)
-
 
 def solve(n, integers):
-    # v3 solution. Optimized and passes
+    # v3 solution
     iters = 0
     valid_seqs = n
-    sum_cache = {}  # 'i:j': (index_stuck_at, sum)
+    sum_cache = {}  # i: (index_stopped_at, sum)
     skip_cache = set()
     for i, integer in enumerate(integers):
         iters += 1
-        integer = int(integer)
+        integer = integers[i]
         if i in skip_cache: break  # short circuit
         if integer < 0:
-            valid_seqs -= 1
+            min_index = i - n
             temp_sum = integer
             j = i - 1
-            max_index = i - n
-            while j > max_index:
-                temp_num = int(integers[j])  # a previous integer
+            valid_seqs -= 1
+            while j > min_index:
+                iters += 1
+                temp_num = integers[j]
+                pos_j = j % n
                 if temp_num < 0:
-                    if (j % n) in sum_cache:
-                        temp_sum += sum_cache[j % n][1]
-                        temp_j = sum_cache[j % n][0]
-                        if temp_j > j: temp_j -= n
-                        j = temp_j
-                        temp_num = int(integers[j])
-                skip_cache.add(j % n)
+                    if pos_j in sum_cache:
+                        temp_sum += sum_cache[pos_j][1]
+                        temp_j = sum_cache[pos_j][0]
+                        if temp_j > j:
+                            pos_j = temp_j
+                            j = temp_j - n
+                        else:
+                            pos_j = temp_j + n
+                            j = temp_j
+                        temp_num = integers[j]
+                skip_cache.add(pos_j)
                 temp_sum += temp_num
                 if temp_sum >= 0:
                     sum_cache[i] = (j, temp_sum - temp_num)
@@ -71,7 +43,6 @@ def solve(n, integers):
                     break
                 valid_seqs -= 1
                 j -= 1
-            if j <= max_index: return 0  # short circuit
     return valid_seqs
 
 
@@ -80,5 +51,5 @@ if __name__ == '__main__':
     while True:
         n = int(input())
         if not n: break
-        # integers = [int(x) for x in input().split()]
-        print(solve(n, input().split()))
+        input_lst = [int(x) for x in input().split()]
+        print(solve(n, input_lst))
