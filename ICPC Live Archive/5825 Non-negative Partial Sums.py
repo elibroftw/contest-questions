@@ -5,12 +5,10 @@
 
 def solve(n, integers):
     # v3 solution
-    iters = 0
     valid_seqs = n
     sum_cache = {}  # i: (index_stopped_at, sum)
     skip_cache = set()
     for i, integer in enumerate(integers):
-        iters += 1
         integer = integers[i]
         if i in skip_cache: break  # short circuit
         if integer < 0:
@@ -19,7 +17,6 @@ def solve(n, integers):
             j = i - 1
             valid_seqs -= 1
             while j > min_index:
-                iters += 1
                 temp_num = integers[j]
                 pos_j = j % n
                 if temp_num < 0:
