@@ -2,7 +2,6 @@
 # https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&category=530&page=show_problem&problem=3836
 
 
-
 def solve(n, integers):
     # v3 solution
     valid_seqs = n
