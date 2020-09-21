@@ -6,7 +6,13 @@
 #include <unordered_map>
 #include <unordered_set>
 
-using namespace std;
+using std::cin;
+using std::cout;
+using std::array;
+using std::pair;
+using std::unordered_map;
+using std::unordered_set;
+using std::ios_base;
 
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL)
 #define MAX_SIZE 1000000  // max is 1,000,000
