@@ -1,25 +1,19 @@
 from typing import List
+from functools import lru_cache
 
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        if s == '': return True
-        paths = {s}
-        visited = set()
-        while paths:
-            new_paths = set()
-            for path in paths:
-                for word in wordDict:
-                    word_len = len(word)
-                    temp = path
-                    while temp.startswith(word):
-                        temp = temp[word_len:]
-                        if temp == '': return True
-                        if temp not in visited:
-                            visited.add(temp)
-                            new_paths.add(temp)
-            paths = new_paths
-        return False  # no matches found
+        @lru_cache
+        def helper(s):
+            if not s: return True  # s is empty
+            for word in wordDict:
+                # if s starts with a word and the rest of the string is made up of words in wordDict
+                if s.startswith(word) and helper(s[len(word):]):
+                    return True
+            return False
+        return helper(s)
+
 
     def run_tests(self):
         assert self.wordBreak('leetcode', ['leet', 'code'])
