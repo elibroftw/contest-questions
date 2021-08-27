@@ -20,7 +20,7 @@ int solution(string &S) {
         if (arrow == '^') ++pointing_up;
         else if (arrow == 'v') ++pointing_down;
         else if (arrow == '<') ++pointing_left;
-        else /* (arrow == '>') */ ++pointing_up;
+        else /* (arrow == '>') */ ++pointing_right;
     }
     // figure out which direction is the most prominent
     // sum of rest will be the smallest then
