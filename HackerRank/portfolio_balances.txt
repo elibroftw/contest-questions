@@ -1,0 +1,116 @@
+An investor opens a new account and wants to invest in a number of assets. Each asset begins with a balance of 0, and its value is stored in an array using 1-based indexing. Periodically, a contribution is received and equal investments are made in a subset of the portfolio. Each contribution will be given by investment amount, start index, end index.  Each investment in that range will receive the contribution amount. Determine the maximum amount invested in any one investment after all contributions.
+
+
+
+For example, start with an array of 5 elements: investments = [0, 0, 0, 0, 0]*.  The variables left and right represent the starting and ending indices, inclusive.  Another variable, contribution, is the new funds to invest per asset.  The first investment is at index 1.
+
+    left right contri-      investments
+               bution
+                      [  0,  0,  0,  0,  0]
+    1    2     10     [ 10, 10,  0,  0,  0]
+    2    4     5      [ 10, 15,  5,  5,  0]
+    3    5     12     [ 10, 15, 17, 17, 12]
+
+
+In the first round, a contribution of 10 is made to investments 1 and 2.  In the second round, a contribution of 5 is made to assets 2, 3 and 4.  Finally, in the third round, a contribution of 12 is added to investments 3, 4 and 5.  The maximum invested in any one asset is 17.
+
+
+
+*Note:  The investments array is not provided in the function. It is to be created after the number of assets available is known.
+
+
+
+Function description
+
+
+
+Complete the maxValue function in the editor below.
+
+
+
+maxValue has the following parameters:
+
+    int n: the number of investments available
+
+    int rounds[o][3]:  each rounds[i] contains 3 integers, [left, right, contribution]
+
+Returns:
+
+    int: the maximum invested in any one asset
+
+
+
+Constraints
+
+3 ≤ n ≤ 107
+1 ≤ o ≤ 2 × 105
+1 ≤ left ≤ right ≤ n
+0 ≤ contribution ≤ 109
+
+
+Input Format
+Input from stdin should be processed as follows and passed to the function.
+
+
+
+The first line contains an integer, n, the number of investments available.
+
+The second line contains an integer, o, the number of rounds of investment.
+
+The next line contains the integer 3, the number of elements used to define each round of investment.
+
+Each of the following o lines contains 3 space-separated integers, left, right, and contribution: the starting index, ending index and value to add
+
+Sample Case 0
+Sample Input 0
+
+STDIN     Function
+-----     --------
+5    →    n = 5
+3    →    rounds[] size o = 3
+3    →    rounds[][] size = 3 (always)
+1 2 100 → rounds = [[1, 2, 100], [2, 5, 100], [3, 4, 100]]
+2 5 100
+3 4 100
+
+
+Sample Output 0
+
+200
+
+
+Explanation 0
+
+Perform the following sequence of o = 3 rounds of investments on investments = [0, 0, 0, 0, 0]:
+
+Add contribution = 100 to every asset in the inclusive range [1, 2], resulting in investments = [100, 100, 0, 0, 0].
+Add contribution = 100 to every asset in the inclusive range [2, 5], resulting in investments = [100, 200, 100, 100, 100].
+Add contribution = 100 to every asset in the inclusive range [3, 4], resulting in investments = [100, 200, 200, 200, 100].
+Return the maximum value in the final list, 200, as the answer.
+
+Sample Case 1
+Sample Input 1
+
+STDIN     Function
+-----     --------
+4    →    n = 4
+3    →    rounds[] size o = 3
+3    →    rounds[][] size = 3
+2 3 603 → rounds = [[2, 3, 603], [1, 1, 286], [4, 4, 882]]
+1 1 286
+4 4 882
+
+
+Sample Output 1
+
+882
+
+
+Explanation 1
+
+Perform the following sequence of o = 3 operations on list = [0, 0, 0, 0]:
+
+Add contribution = 603 to every asset in the inclusive range [2, 3], resulting in investments = [0, 603, 603, 0].
+Add contribution = 286 to every asset in the inclusive range [1, 1], resulting in investments = [286, 603, 603, 0].
+Add contribution = 882 to every asset in the inclusive range [4, 4], resulting in investments = [286, 603, 603, 882].
+Return the maximum value in the final list, 882, as the answer.
