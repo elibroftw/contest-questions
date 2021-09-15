@@ -5,8 +5,6 @@ import os
 import random
 import re
 import sys
-from multiprocessing import Process
-from functools import reduce
 
 
 #
@@ -17,7 +15,6 @@ from functools import reduce
 #  1. INTEGER n
 #  2. 2D_INTEGER_ARRAY rounds
 #
-
 
 
 from contextlib import suppress
@@ -34,17 +31,20 @@ def maxValue(n, rounds):
 
     investments = [0 for _ in range(n)]
 
-    for left, right, contrib in rounds:
-        investments[left - 1] += contrib
+    for start, end, contrib in rounds:
+        investments[start - 1] += contrib  # increase start
         with suppress(IndexError):
-            investments[right] -= contrib
+            # decrease right of end (to offset the + contrib in final processing)
+            investments[end] -= contrib
 
-    for i in range(n - 1):  # skip last index
+    max_invested = investments[0] if n else 0
+    for i in range(n - 1):  # avoid IndexError
         investments[i + 1] = investments[i]
+        if investments[i + 1] > max_invested:
+            max_invested = investments[i + 1]
 
-    return max(investments)
+    return max_invested
 
-    # Write your code here
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
