@@ -4,15 +4,15 @@ from functools import lru_cache
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+
         @lru_cache
-        def helper(s):
-            if not s: return True  # s is empty
+        def helper(i):
+            if not s[i:]: return True
             for word in wordDict:
-                # if s starts with a word and the rest of the string is made up of words in wordDict
-                if s.startswith(word) and helper(s[len(word):]):
+                if s[i:].startswith(word) and helper(i + len(word)):
                     return True
             return False
-        return helper(s)
+        return helper(0)
 
 
     def run_tests(self):
