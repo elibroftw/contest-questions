@@ -73,9 +73,68 @@ def analyze_test_case(starting_lineup: tuple):
             if lines_backward == True: return steps
         if not lines_forward and not lines_backward:
             return 'IMPOSSIBLE'
-n = 1
-while n > 0:
+
+
+# using tuples and deques instead of sets to keep track of lineups
+# requires bidirectional search to be more optimal
+# from queue import deque
+# # use a stack to keep track of configuartions
+
+# def run_bfs(starting_lineup: tuple, size: int):
+#     # returns minimum_moves: int | 'IMPOSSIBLE': str
+#     # starting_lineup: (tuple of tuples of int) ; tuple of coin stacks
+#     # assume first coin is the top of a coin stack
+#     # use a queue for keeping track of the lineups (FIFO)
+#     final_lineup = tuple(sorted(starting_lineup))
+#     # base case
+#     if starting_lineup == final_lineup: return 0
+#     # todo: bidirectional search
+#     lines_forward, lines_backward = deque((starting_lineup,)), deque((final_lineup,))
+#     new_lines_forward, new_lines_backward = deque(), deque()
+#     visited_forward, visited_backward = {starting_lineup}, {final_lineup}
+#     steps = 1
+#     while True:
+#         if not lines_forward:
+#             if not new_lines_forward:
+#                 break
+#             lines_forward, new_lines_forward = new_lines_forward, lines_forward
+#             steps += 1
+#         lineup = lines_forward.popleft()
+#         # for each position, try moving top coin left or right
+#         for i, coin_stack in enumerate(lineup):
+#             if coin_stack:
+#                 if i > 0:
+#                     # try moving top of stack to the left
+#                     left_of_i = lineup[i - 1]
+#                     if not left_of_i or left_of_i[0] >= coin_stack[0]:
+#                         # valid to move the coin left
+#                         left_of_i = (coin_stack[0],) + left_of_i
+#                         possible_lineup = lineup[:i - 1] + (left_of_i,) + (lineup[i][1:],) + lineup[i + 1:]
+#                         if possible_lineup not in visited_forward:
+#                             if possible_lineup == final_lineup:
+#                                 return steps
+#                             visited_forward.add(possible_lineup)
+#                             new_lines_forward.append(possible_lineup)
+#                 if i < size - 1:
+#                     # try moving top of stack to the right
+#                     right_of_i = lineup[i + 1]
+#                     if not right_of_i or right_of_i[0] >= coin_stack[0]:
+#                         # valid to move the coin right
+#                         right_of_i = (coin_stack[0],) + right_of_i
+#                         possible_lineup = lineup[:i] + (lineup[i][1:],) + (right_of_i,) + lineup[i + 2:]
+#                         if possible_lineup not in visited_forward:
+#                             if possible_lineup == final_lineup:
+#                                 return steps
+#                             visited_forward.add(possible_lineup)
+#                             new_lines_forward.append(possible_lineup)
+#     return 'IMPOSSIBLE'
+
+
+while True:
     n = int(input())
-    if n:
-        starting_lineup = tuple(input().split())
-        print(analyze_test_case(starting_lineup))
+    if n == 0:
+        break
+    starting_lineup = tuple(input().split())
+    print(analyze_test_case(starting_lineup))
+    # lineup = tuple(((pos,) for pos in input().split()))
+    # print(run_bfs(lineup, n))
