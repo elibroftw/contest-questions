@@ -1,4 +1,5 @@
 # Programming Challenges Solution Repository
+
 Includes solutions for uWaterloo's CCC, Hackerrank, GeeksForGeeks, LeetCode, Google Kickstart, and some useful graph algorithms in python 3.
 
 NOTE: I made this so that others may learn from the techniques I have used to solve problems that may or may not be mainstream. An example of this is
@@ -6,8 +7,8 @@ NOTE: I made this so that others may learn from the techniques I have used to so
 
 Another note: I've also noticed that there is a lack of organization / design / aesthetic when it comes to programmers sharing their solutions, and so this repository aims fill that void. I'm obviously not the smartest programmer and I like to create projects so this repository might not have everything you look for.
 
+## Canadian Computing Competition
 
-# Canadian Computing Competition
 https://cemc.math.uwaterloo.ca/contests/computing.html
 
 | **Year**  |  **Type**  |  **Completed**  | **Total Score**
@@ -32,3 +33,11 @@ https://cemc.math.uwaterloo.ca/contests/computing.html
 | [2011](CCC/2011) |  *Senior* | X - X  | 0/75
 | [2010](CCC/2010) |  *Junior* | 1 - 5  | 75/75
 | [2010](CCC/2010) |  *Senior* | 1 - 2  | 30/75
+
+## Optimization Tricks
+
+- [Convex Hull Dynamic Programming Optimization](https://jeffreyxiao.me/blog/convex-hull-trick)
+  - Test knowledge on [Z-Frog 3](https://atcoder.jp/contests/dp/tasks/dp_z)
+    - [Solution](https://youtu.be/HnZKQJtGeHs)
+  - "technique is "obvious" to anybody who has learned the [sweep line algorithm](https://leetcode.com/discuss/study-guide/2166045/line-sweep-algorithms) for the [line segment intersection problem](https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/)."
+  - Introduced by Brucker, P. (1995). Efficient algorithms for some path partitioning problems. Discrete Applied Mathematics, 62(1-3), 77-85.
