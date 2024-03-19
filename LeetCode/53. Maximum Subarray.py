@@ -4,15 +4,15 @@ from typing import List
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         """
-        Keep track of max till the current number
-        Reset max till current number if it becomes negative
+        Keep track of sum on an interval basis
+        Reset interval sum if it becomes negative
         """
-        cur_max = -10 ** 4 - 1
-        max_till_here = 0
+        # minimum possible number
+        max_sum = -10 ** 4 - 1
+        interval_sum = 0
         for num in nums:
-            max_till_here += num
-            if max_till_here > cur_max:
-                cur_max = max_till_here
-            if max_till_here < 0:
-                max_till_here = 0
-        return cur_max
+            interval_sum += num
+            max_sum = max(max_sum, interval_sum)
+            # reset if negative sum encountered
+            interval_sum = max(interval_sum, 0)
+        return max_sum
