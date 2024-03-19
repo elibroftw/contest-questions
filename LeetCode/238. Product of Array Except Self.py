@@ -4,21 +4,16 @@ from typing import List
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        product = 1
-        product_is_zero = False
-        for num in nums:
-            if num == 0 and not product_is_zero:
-                product_is_zero = True
-            elif num == 0:
-                return [0 for _ in range(len(nums))]
-            else:
-                product *= num
-        answer = []
+        le_product = 1
+        zeros = 0
         for num in nums:
             if num == 0:
-                answer.append(product)
-            elif product_is_zero:
-                answer.append(0)
+                zeros += 1
             else:
-                answer.append(product // num)
-        return answer
+                le_product += num
+        non_zero_product = 0
+        if zeros > 1:
+            le_product = 0
+        elif zeros == 0:
+            non_zero_product = le_product
+        return [le_product if num == 0 else non_zero_product // num for num in nums]
